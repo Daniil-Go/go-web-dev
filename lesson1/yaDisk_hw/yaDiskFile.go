@@ -21,23 +21,32 @@ const (
 )
 
 func main() {
+	// запуск функций с обработкой ошибок:
+	// запуск функции, которая получает ссылку на скачивание
 	fileInfo, err := getDownloadLink(commonDownLoadURL + publicKey)
 	if err != nil {
+		// Wrap возвращает ошибку с обозначанием вместе со следом вызовов
+		// в месте где Wrap вызван, и доставляет сообщение.
+		// If err is nil, Wrap returns nil.
 		log.Println(errors.Wrap(err, "getDownloadLink"))
 		return
 	}
 
+	// запуск функции скачивания файла которя на вход получает ссылку по указателю (почему?)
 	if err := downloadAndSaveFile(*fileInfo); err != nil {
 		log.Println(err)
 	}
 }
 
+// структура, которя будет конвертироваться в json
 type FileInfo struct {
 	Href     string `json:"href"`
 	FileLink string `json:"file"`
 	FileName string `json:"name"`
 }
 
+// метод получения ссылки на скачивание: на вход получает ссылку, на выходе записывает данные в структуру
+// и возвращает ошибку
 func getDownloadLink(reqURL string) (*FileInfo, error) {
 	body, err := doReq(reqURL, "GET", nil, false)
 	if err != nil {
