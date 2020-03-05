@@ -92,14 +92,15 @@ func showCookieHandle(wr http.ResponseWriter, req *http.Request) {
 func searchPostReq(wr http.ResponseWriter, req *http.Request) {
 
 	if req.Method == "POST" {
-		SearchJSON := new(SearchJSON)
 
-		defer req.Body.Close()
 		bodyJSON, err := ioutil.ReadAll(req.Body)
 		if err != nil {
 			errors.Wrap(err, "Error during reading from POST req body")
 			return
 		}
+		defer req.Body.Close()
+
+		SearchJSON := new(SearchJSON)
 
 		err = json.Unmarshal(bodyJSON, SearchJSON)
 		if err != nil {
