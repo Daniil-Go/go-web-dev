@@ -14,6 +14,7 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("/", viewBlog)
+	router.HandleFunc("/post", viewPost)
 
 	log.Printf("start listen on port %v", port)
 
@@ -22,6 +23,12 @@ func main() {
 
 func viewBlog(w http.ResponseWriter, r *http.Request) {
 	if err := tmpl.ExecuteTemplate(w, "blog", simpleBlog); err != nil {
+		log.Println(err)
+	}
+}
+
+func viewPost(w http.ResponseWriter, r *http.Request) {
+	if err := tmpl.ExecuteTemplate(w, "post", onePost); err != nil {
 		log.Println(err)
 	}
 }
