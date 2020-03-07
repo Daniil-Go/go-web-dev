@@ -1,0 +1,23 @@
+{{define "post"}}
+    <html>
+    <head>
+        <title>{{.Title}}</title>
+    </head>
+    <body>
+    <h1>{{.Title}}</h1>
+    <div>
+        {{range .Posts}}
+        <div>
+            {{template "rangePost" . }}
+            {{end}}
+        </div>
+    </div>
+    </body>
+    </html>
+{{end}}
+
+{{define "rangePost"}}
+    <h2>{{.Name}}</h2>
+    <article>{{.Body}}</article>
+    <p>{{.Comment}}</p>
+{{end}}
