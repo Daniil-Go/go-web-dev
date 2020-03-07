@@ -6,7 +6,6 @@ import (
 	"net/http"
 )
 
-var tmpl = template.Must(template.New("MyTemplate").ParseFiles("template.html"))
 
 func main() {
 	port := "8080"
@@ -22,12 +21,14 @@ func main() {
 }
 
 func viewBlog(w http.ResponseWriter, r *http.Request) {
+	var tmpl = template.Must(template.New("blog").ParseFiles("template.html"))
 	if err := tmpl.ExecuteTemplate(w, "blog", simpleBlog); err != nil {
 		log.Println(err)
 	}
 }
 
 func viewPost(w http.ResponseWriter, r *http.Request) {
+	var tmpl = template.Must(template.New("post").ParseFiles("post.html"))
 	if err := tmpl.ExecuteTemplate(w, "post", onePost); err != nil {
 		log.Println(err)
 	}

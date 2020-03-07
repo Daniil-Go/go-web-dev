@@ -8,7 +8,7 @@
     <div>
         {{range .Posts}}
         <div>
-            {{template "post" . }}
+            {{template "rangePost" . }}
         {{end}}
         </div>
     </div>
@@ -16,7 +16,7 @@
     </html>
 {{end}}
 
-{{define "post"}}
+{{define "rangePost"}}
     <h2>{{.Name}}</h2>
     <article>{{.Body}}</article>
     <p>{{.Comment}}</p>
