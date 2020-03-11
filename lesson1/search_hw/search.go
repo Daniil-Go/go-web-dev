@@ -1,11 +1,11 @@
 package main
 
 import (
-"io/ioutil"
-"log"
-"net/http"
-"strings"
-"sync"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"strings"
+	"sync"
 )
 
 func main() {
@@ -19,8 +19,8 @@ func main() {
 
 	var (
 		result = make([]string, 0, len(sites)) // создаем срез типа строка с кол-вом 0 элементов, но подготовленный
-												// для увелечения кол-ва элементов как в массиве sites
-		errs   int
+		// для увелечения кол-ва элементов как в массиве sites
+		errs int
 	)
 
 	// you can add flag here
@@ -47,11 +47,11 @@ func main() {
 func search(str string, sites []string) ([]string, int) { // принимает на вход строку запроса и массив сайтов, выводит
 	//срез стринг и число (ошибок)
 	out := make([]string, 0, 1) // подготовка среза для вывода результата
-	errs := 0 // счетчик ошибок
+	errs := 0                   // счетчик ошибок
 
 	for _, site := range sites { // запускается цикл, который итерируется по массиву сайтов
 		res, err := getReq(site) // запуск функции GET запроса. возвращет массив байтов Body
-		if err != nil { // обработка ошибок
+		if err != nil {          // обработка ошибок
 			errs++
 			log.Print(err) // вывод ошибок
 			continue
@@ -90,13 +90,13 @@ type chunk struct { // создаем структуру
 // the second version of search
 func searchConcurrency(str string, sites []string) ([]string, int) { // тоже самое - на вход строка, массив сайтов,
 	// а на выход срез и кол-во ошибок
-	wg := sync.WaitGroup{} // присваем тип WaitGroup (будем ждать завершения всех горутин)
+	wg := sync.WaitGroup{}      // присваем тип WaitGroup (будем ждать завершения всех горутин)
 	results := make(chan chunk) // создаем канал, который будет посылать данные в структуру
 
 	for _, site := range sites { // итерируемся по массиву сайтов
-		wg.Add(1) // добавляем 1 в группу ожидания горутин
+		wg.Add(1)              // добавляем 1 в группу ожидания горутин
 		go func(site string) { // запуск горутины
-			defer wg.Done() // по завершении данной горутины удаляем ее из группы ожидания
+			defer wg.Done()          // по завершении данной горутины удаляем ее из группы ожидания
 			res, err := getReq(site) // запуск функции ГЕТ запроса
 			if err != nil {
 				results <- chunk{site: site, err: err} // отправляем ошибки в структуру
