@@ -5,8 +5,14 @@ import (
 	"log"
 )
 
-const DSN = "root:1234@tcp(localhost:3306)/task_list_app?charset=utf8"
+// [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
+const DSN = "root:password@tcp(localhost:3306)/task_list_app?charset=utf8"
 
+/*
+sudo docker exec -it MySQL1 mysql -uroot -p
+ */
+
+// Структура для взаимодействия с БД
 type Post struct {
 	Id      int
 	Title   string
@@ -31,6 +37,7 @@ const (
 	tableName    = "habr_posts"
 )
 
+// Заполняем БД стандартными значениями
 func (s Server) insertDefault() {
 	for _, post := range createPosts() {
 		query := fmt.Sprintf(
@@ -44,6 +51,7 @@ func (s Server) insertDefault() {
 	log.Print("inserted default")
 }
 
+// Слайс постов
 func createPosts() []Post {
 	return []Post{
 		{
@@ -63,6 +71,7 @@ func createPosts() []Post {
 	}
 }
 
+// Очищаем содержимое таблицы
 func (s Server) truncate() {
 	query := fmt.Sprintf("truncate %s.%s;", databaseName, tableName)
 	_, err := s.db.Exec(query)
