@@ -1,3 +1,3 @@
 #Mongo DB
 
-Soonly here will apper the implementation of Go httpServer and MongoDB
+Test implementation of beeGo and MongoDB
