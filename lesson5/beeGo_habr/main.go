@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	_ "go-web-dev/lesson5/routers"
+	_ "go-web-dev/lesson5/beeGo_habr/routers"
 
 	"github.com/astaxie/beego"
 )

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"runtime"
 	"path/filepath"
-	_ "not-for-work/GeekBrainsWebinars/current-lessons/5/99_hw/habr-posts/routers"
+	_ "go-web-dev/lesson5/beeGo_habr/routers"
 
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"

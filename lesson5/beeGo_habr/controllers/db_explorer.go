@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"not-for-work/GeekBrainsWebinars/current-lessons/5/99_hw/habr-posts/models"
+	"go-web-dev/lesson5/beeGo_habr/models"
 )
 
 func getPosts(db *sql.DB) ([]models.Post, error) {

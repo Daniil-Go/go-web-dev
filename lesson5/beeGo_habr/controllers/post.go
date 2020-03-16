@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"strconv"
 
-	"not-for-work/GeekBrainsWebinars/current-lessons/5/99_hw/habr-posts/models"
+	"go-web-dev/lesson5/beeGo_habr/models"
 
 	"github.com/astaxie/beego"
 )
