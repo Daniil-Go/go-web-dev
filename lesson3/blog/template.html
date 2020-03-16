@@ -1,0 +1,22 @@
+{{define "blog"}}
+    <html>
+    <head>
+        <title>{{.Title}}</title>
+    </head>
+    <body>
+    <h1>{{.Title}}</h1>
+    <div>
+        {{range .Posts}}
+        <div>
+            {{template "post" . }}
+        {{end}}
+        </div>
+    </div>
+    </body>
+    </html>
+{{end}}
+
+{{define "post"}}
+    <h2>{{.Name}}</h2>
+    <article>{{.Body}}</article>
+{{end}}
