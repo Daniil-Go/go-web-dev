@@ -44,7 +44,7 @@ func main() {
 		db:        db,
 	}
 
-	// Заполняем БД таблицами с постами (тут непонятна запись=> server - интерфейс и к нему применяется метод insertDefault)
+	// Заполняем БД таблицами с постами (применяется метод insertDefault)
 	server.insertDefault()
 
 	// router := http.NewServeMux()
@@ -84,7 +84,7 @@ func (server *Server) handlePostsList(wr http.ResponseWriter, req *http.Request)
 		return
 	}
 
-	// Получаем в переменную посты (содержание строк таблицы)
+	// Получаем в переменную посты (содержание строк таблицы из БД)
 	posts, err := getPosts(server.db)
 	if err != nil {
 		log.Println(err)

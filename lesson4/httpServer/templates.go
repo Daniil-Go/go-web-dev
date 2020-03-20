@@ -9,7 +9,7 @@ import (
 // Создаем тип
 type templateName string
 
-// Обозначаем константы
+// Обозначаем константы (кастомные типы)
 const (
 	List   templateName = "list.html"
 	Single templateName = "single.html"
