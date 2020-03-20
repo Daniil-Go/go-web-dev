@@ -1,3 +1,3 @@
 #Testing
 
-* Implementation of testing. Soonly.
+* Implementation of testing.
