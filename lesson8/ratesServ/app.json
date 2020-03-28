@@ -1,0 +1,5 @@
+{
+  "endpoint_url": "https://api.exchangeratesapi.io/latest?base=USD",
+  "port": "8080",
+  "log_file" : "new_app.log"
+}
