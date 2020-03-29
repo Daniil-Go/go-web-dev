@@ -1,11 +1,15 @@
 package main
 
-import "sync"
+import (
+	"os"
+	"sync"
+)
 
 type Configuration struct {
 	EndpointUrl string `json:"endpoint_url" check:"required"`
 	Port        string `json:"port" check:"required"`
 	LogFile     string `json:"log_file" check:"required"`
+	outputFile  *os.File
 }
 
 type Cache struct {

@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func (c *Configuration) init() {
+func (c *Configuration) readConfig() {
 	bytes, err := ioutil.ReadFile("app.json")
 	if err != nil {
 		log.Fatal(err)
@@ -19,23 +19,28 @@ func (c *Configuration) init() {
 	if err = json.Unmarshal(bytes, &c); err != nil {
 		log.Fatal(err)
 	}
+}
 
-	f, err := os.OpenFile(c.LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+func (c *Configuration) setLog() {
+	var err error
+	c.outputFile, err = os.OpenFile(c.LogFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Не понимаю, как правильно обработать (в каком месте)
 	//defer f.Close()
-	log.SetOutput(f)
+	log.SetOutput(c.outputFile)
 
-	//log.Printf("%+v", Config)
+	log.Printf("%+v", c)
 }
 
 func main() {
 
 	var Config Configuration
-	Config.init()
+	Config.readConfig()
+	Config.setLog()
+	defer Config.outputFile.Close()
 
 	/*
 		const (
@@ -51,6 +56,7 @@ func main() {
 		for {
 			rates.getRates(Config.EndpointUrl)
 			log.Printf("Rates successfully updated")
+			fmt.Println("Rates successfully updated")
 			time.Sleep(60 * time.Second)
 		}
 	}()
